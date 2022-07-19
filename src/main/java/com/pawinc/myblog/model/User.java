@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Entity
-@Table()
+@Table(name = "users")
 public class User {
 
     @Id
@@ -28,7 +28,7 @@ public class User {
     private String lastName;
 
     @Column(name = "gender")
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     @NotNull
     private Gender gender;
 
