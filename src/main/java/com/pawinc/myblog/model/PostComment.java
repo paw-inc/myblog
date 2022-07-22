@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "post_comments")
@@ -32,7 +33,7 @@ public class PostComment {
 
     @ManyToOne
     @JoinColumn(
-            name = "user_id",
+            name = "author_id",
             nullable = false
     )
     private User author;
@@ -71,5 +72,23 @@ public class PostComment {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PostComment that = (PostComment) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(content, that.content) &&
+                Objects.equals(createdAt, that.createdAt) &&
+                Objects.equals(updatedAt, that.updatedAt) &&
+                Objects.equals(postId, that.postId) &&
+                Objects.equals(author, that.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, content, createdAt, updatedAt, postId, author);
     }
 }
