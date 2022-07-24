@@ -1,5 +1,7 @@
 package com.pawinc.myblog.model;
 
+import org.hibernate.validator.constraints.URL;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -21,6 +23,11 @@ public class Post {
     @Column(name = "meta_title")
     @NotBlank
     private String metaTitle;
+
+    @Column(name = "title_image")
+    @NotNull
+    @URL
+    private String titleImage;
 
     @NotBlank(message = "Short description is mandatory")
     private String summary;

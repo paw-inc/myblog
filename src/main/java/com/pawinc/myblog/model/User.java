@@ -1,6 +1,7 @@
 package com.pawinc.myblog.model;
 
 import com.pawinc.myblog.model.enums.Gender;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -58,6 +59,7 @@ public class User {
     private LocalDateTime registeredAt;
 
     @Column(name = "photo")
+    @URL
     private String photo;
 
     @ManyToOne
