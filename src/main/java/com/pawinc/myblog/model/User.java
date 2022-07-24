@@ -32,6 +32,10 @@ public class User {
     @NotBlank(message = "The last name is mandatory")
     private String lastName;
 
+    @Column(name = "nickname")
+    @NotBlank(message = "The nickname is mandatory")
+    private String nickname;
+
     @NotNull
     @Column(name = "gender")
     @Enumerated(EnumType.ORDINAL)
@@ -72,6 +76,8 @@ public class User {
 
     public User() {}
 
+
+
     public Long getId() {
         return id;
     }
@@ -94,6 +100,14 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public Gender getGender() {
@@ -173,23 +187,21 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
-                gender == user.gender &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(birthDate, user.birthDate) &&
-                Objects.equals(registeredAt, user.registeredAt) &&
-                Objects.equals(photo, user.photo) &&
-                Objects.equals(role, user.role);
+        return Objects.equals(id, user.id)
+                && Objects.equals(firstName, user.firstName)
+                && Objects.equals(lastName, user.lastName)
+                && Objects.equals(nickname, user.nickname)
+                && gender == user.gender
+                && Objects.equals(email, user.email)
+                && Objects.equals(password, user.password)
+                && Objects.equals(birthDate, user.birthDate)
+                && Objects.equals(registeredAt, user.registeredAt)
+                && Objects.equals(photo, user.photo)
+                && Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                id, firstName, lastName, gender, email,
-                password, birthDate, registeredAt, photo, role
-        );
+        return Objects.hash(id, firstName, lastName, nickname, gender, email, password, birthDate, registeredAt, photo, role);
     }
 }
