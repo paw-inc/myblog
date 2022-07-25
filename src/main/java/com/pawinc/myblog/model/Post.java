@@ -1,5 +1,6 @@
 package com.pawinc.myblog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
@@ -37,7 +38,6 @@ public class Post {
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    @NotNull
     private LocalDateTime updatedAt;
 
     @NotBlank
@@ -55,6 +55,7 @@ public class Post {
     )
     private Set<PostComment> comments;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(
             name = "author_id",
@@ -87,6 +88,14 @@ public class Post {
 
     public void setMetaTitle(String metaTitle) {
         this.metaTitle = metaTitle;
+    }
+
+    public String getTitleImage() {
+        return titleImage;
+    }
+
+    public void setTitleImage(String titleImage) {
+        this.titleImage = titleImage;
     }
 
     public String getSummary() {
@@ -158,20 +167,22 @@ public class Post {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
-        return Objects.equals(id, post.id) &&
-                Objects.equals(title, post.title) &&
-                Objects.equals(metaTitle, post.metaTitle) &&
-                Objects.equals(summary, post.summary) &&
-                Objects.equals(createdAt, post.createdAt) &&
-                Objects.equals(updatedAt, post.updatedAt) &&
-                Objects.equals(content, post.content) &&
-                Objects.equals(likesCount, post.likesCount) &&
-                Objects.equals(viewsCount, post.viewsCount) &&
-                Objects.equals(author, post.author);
+        return Objects.equals(id, post.id)
+                && Objects.equals(title, post.title)
+                && Objects.equals(metaTitle, post.metaTitle)
+                && Objects.equals(titleImage, post.titleImage)
+                && Objects.equals(summary, post.summary)
+                && Objects.equals(createdAt, post.createdAt)
+                && Objects.equals(updatedAt, post.updatedAt)
+                && Objects.equals(content, post.content)
+                && Objects.equals(likesCount, post.likesCount)
+                && Objects.equals(viewsCount, post.viewsCount)
+                && Objects.equals(author, post.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, metaTitle, summary, createdAt, updatedAt, content, likesCount, viewsCount, author);
+        return Objects.hash(id, title, metaTitle, titleImage, summary, createdAt,
+                updatedAt, content, likesCount, viewsCount, author);
     }
 }

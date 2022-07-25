@@ -64,6 +64,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
+    @NotNull
     private Role role;
 
     @OneToMany(
