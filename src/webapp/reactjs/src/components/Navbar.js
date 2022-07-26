@@ -12,7 +12,12 @@ function Navbar() {
                 <Link to="/" className="navbar-logo">
                     PAW <i className="fa-solid fa-wheelchair-move"></i>
                 </Link>
-                <input className={"navbar-search"} type={"text"} placeholder={"Search"}/>
+                <form action="" className="search-bar">
+                    <input type="search" name="search" pattern=".*\S.*" required/>
+                    <button className="search-btn" type="submit">
+                            <span>Search</span>
+                        </button>
+                </form>
                 <Button buttonStyle={'btn--primary'}>Sign in</Button>
                 <Button buttonStyle={'btn--outline'}>Sign up</Button>
             </div>
