@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
 
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository) {
@@ -49,6 +50,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> getAll() {
-        return postRepository.findAll();
+        List<Post> posts = postRepository.findAll();
+        return posts.isEmpty() ? new ArrayList<>() : posts;
+    }
+
+    @Override
+    public List<Post> getMostPopularPosts() {
+        List<Post> popPosts = postRepository.getTop5MostPopularPosts();
+        return popPosts.isEmpty() ? new ArrayList<>() : popPosts;
     }
 }

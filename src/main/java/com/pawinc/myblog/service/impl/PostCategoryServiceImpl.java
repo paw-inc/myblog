@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class PostCategoryServiceImpl implements PostCategoryService {
 
-    private PostCategoryRepository postCategoryRepository;
+    private final PostCategoryRepository postCategoryRepository;
 
     @Autowired
     public PostCategoryServiceImpl(PostCategoryRepository postCategoryRepository) {
@@ -49,6 +50,7 @@ public class PostCategoryServiceImpl implements PostCategoryService {
 
     @Override
     public List<PostCategory> getAll() {
-        return postCategoryRepository.findAll();
+        List<PostCategory> categories = postCategoryRepository.findAll();
+        return categories.isEmpty() ? new ArrayList<>() : categories;
     }
 }

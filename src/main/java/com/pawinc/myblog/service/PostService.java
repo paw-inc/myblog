@@ -13,4 +13,5 @@ public interface PostService {
     void delete(long id);
 
     List<Post> getAll();
+    List<Post> getMostPopularPosts();
 }

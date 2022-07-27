@@ -64,7 +64,7 @@ public class Post {
     private User author;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category")
+    @JoinColumn(name = "category_id")
     private PostCategory postCategory;
 
     public Post() {

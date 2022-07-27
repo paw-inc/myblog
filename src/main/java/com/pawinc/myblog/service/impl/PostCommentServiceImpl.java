@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class PostCommentServiceImpl implements PostCommentService {
 
-    private PostCommentRepository postCommentRepository;
+    private final PostCommentRepository postCommentRepository;
 
     @Autowired
     public PostCommentServiceImpl(PostCommentRepository postCommentRepository) {
@@ -49,6 +50,7 @@ public class PostCommentServiceImpl implements PostCommentService {
 
     @Override
     public List<PostComment> getAll() {
-        return postCommentRepository.findAll();
+        List<PostComment> comments = postCommentRepository.findAll();
+        return comments.isEmpty() ? new ArrayList<>() : comments;
     }
 }
