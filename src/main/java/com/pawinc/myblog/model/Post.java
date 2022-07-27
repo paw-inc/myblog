@@ -56,12 +56,16 @@ public class Post {
     private Set<PostComment> comments;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "author_id",
             nullable = false
     )
     private User author;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category")
+    private PostCategory postCategory;
 
     public Post() {
     }

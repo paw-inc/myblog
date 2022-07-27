@@ -3,6 +3,8 @@ package com.pawinc.myblog.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "post_categories")
@@ -15,8 +17,14 @@ public class PostCategory {
     @NotBlank
     private String categoryName;
 
-    @Column(name = "parent_category")
-    private Integer parentCategory;
+    @OneToOne()
+    @JoinColumn(name = "parent_category")
+    private PostCategory parentCategory;
+
+    @OneToMany(
+            mappedBy = "postCategory"
+    )
+    private Set<Post> posts;
 
     public PostCategory() {
     }
@@ -37,11 +45,11 @@ public class PostCategory {
         this.categoryName = categoryName;
     }
 
-    public Integer getParentCategory() {
+    public PostCategory getParentCategory() {
         return parentCategory;
     }
 
-    public void setParentCategory(Integer parentCategory) {
+    public void setParentCategory(PostCategory parentCategory) {
         this.parentCategory = parentCategory;
     }
 

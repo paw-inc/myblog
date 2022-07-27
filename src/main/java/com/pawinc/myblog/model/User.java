@@ -62,7 +62,7 @@ public class User {
     @URL
     private String photo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     @NotNull
     private Role role;
